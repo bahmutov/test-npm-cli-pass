@@ -1,0 +1,21 @@
+{
+  "name": "test-npm-cli-pass",
+  "version": "1.0.0",
+  "description": "Testing how NPM pass CLI options after -- on Windows",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run demo -- --foo bar",
+    "demo": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bahmutov/test-npm-cli-pass.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bahmutov/test-npm-cli-pass/issues"
+  },
+  "homepage": "https://github.com/bahmutov/test-npm-cli-pass#readme"
+}
