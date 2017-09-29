@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run demo -- --foo bar",
+    "test-win": "npm run demo -- --foo c:\\bar\\",
+    "test-win2": "npm run demo -- c:\\bar\\ c:\\baz\\",
     "demo": "node index.js"
   },
   "repository": {
