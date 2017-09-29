@@ -87,3 +87,49 @@ process.argv
 
 Instead of two arguments we get single argument with each original one ending with extra `"` character.
 
+## also incorrect
+
+On Mac / Linux the behavior is also incorrect. Running `npm run test-win2` puts
+both arguments into single string, removing backslashes.
+
+```
+npm 4.6.1
+```
+
+```
+$ npm run test-win2
+
+> test-npm-cli-pass@1.0.0 test-win2 /Users/irinakous/git/test-npm-cli-pass
+> npm run demo -- c:\bar\ c:\baz\
+
+
+> test-npm-cli-pass@1.0.0 demo /Users/irinakous/git/test-npm-cli-pass
+> node index.js "c:bar c:baz"
+
+process.argv
+[ '/Users/irinakous/.nvm/versions/node/v6.8.1/bin/node',
+  '/Users/irinakous/git/test-npm-cli-pass/index.js',
+  'c:bar c:baz' ]
+```
+
+Calling the script directly `npm run demo -- c:\\bar\\ c:\\baz\\` combines the best of both
+errors
+
+```
+$ npm run demo -- c:\\bar\\ c:\\baz\\
+
+> test-npm-cli-pass@1.0.0 demo /Users/irinakous/git/test-npm-cli-pass
+> node index.js "c:\bar\" "c:\baz\"
+
+process.argv
+[ '/Users/irinakous/.nvm/versions/node/v6.8.1/bin/node',
+  '/Users/irinakous/git/test-npm-cli-pass/index.js',
+  'c:\\bar" c:baz"' ]
+```
+
+It takes the prize
+
+* adds extra `"` to the arguments
+* puts both args into single string
+* escapes *second* argument, but does not escape *first*
+
